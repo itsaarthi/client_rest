@@ -10,12 +10,12 @@ console.log("Establishing Connection");
 
 var options = { 
 	hostname: 'localhost', 
-	port: 8001, 
+	port: 8002, 
 	path: '/api', 
 	method: 'GET'
 	}; 
 
-var req = http.request(options, function(res) { 
+var req = http.request(options, function(res) {   //http client call syntax
 	res.on('data', function(data) { 
 	process.stdout.write(data); 
 		}); 
