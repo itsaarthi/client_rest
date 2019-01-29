@@ -24,14 +24,14 @@ console.log("2.E");
 						read({prompt : 'Enter your mail_id',silent : false},function(err,mail_id){
 							read({prompt : 'Enter your phonenumber',silent : false},function(err,phonenumber){
 								read({prompt : 'Enter your password',silent : true},function(err,password){
-										var payload = JSON.stringify({
+										var payload = {
 											user_name : user_name,
 											first_name : first_name,
 											last_name : last_name,
 											mail_id : mail_id,
 											phonenumber : phonenumber,
 											password : password
-									})		
+									}
 									login.register(payload);						
 								});
 							});
