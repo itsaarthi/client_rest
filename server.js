@@ -1,7 +1,7 @@
 var port = 8001;
 var http = require('http');
 var app = require('./apps');
-var login = require(__root+'/login/loginController')
+var login = require(__root+'login/loginController')
 var read = require('read');
 
 console.log("login",login);
