@@ -3,38 +3,75 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var http = require('http');
 router.use(bodyParser.json());
-
+var request = require('request');
 
 var LoginCon={};
 
 LoginCon.register = function(payload){
-	var pay= payload;
-	console.log("pay",pay.first_name);
+   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
-	path: '/api/user', 
+	path: '/api/user/register', 
 	method: 'POST'
 	}; 
-	var post = JSON.stringify({
+	const postData = {
 		user_name : payload.user_name,
-		first_name : payload.first_name,
-		last_name : payload.last_name,
 		mail_id : payload.mail_id,
-		phonenumber : payload.phonenumber,
-		password : payload.password
-})
-	var req1 = http.request(options, function(res1) {   //http client call syntax
+		password : payload.password,
+		mac 	: 	macAddress
+};
+	request.post({url:'http://localhost:8002/user/register', formData: postData}, function optionalCallback(err, httpResponse, body) {
+   if (err) {
+    return console.error('upload failed:', err);
+   }
+   console.log('Upload successful!  Server responded with:', body);
+ });
+	/*var req = http.request(options, function(res1) {   //http client call syntax
 	res1.on('data', function(data) { 
 	process.stdout.write(data); 
 	}); 
 	}); 
+	req.write(post);
 	console.log("post",post);
-	req1.write(post)
-	req1.end();
+	req.end();*/
 
+});
 }
 
+LoginCon.login = function(payload){
+ 
+   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
+	var options = { 
+	hostname: 'localhost', 
+	port: 8002, 
+	path: '/api/user/login', 
+	method: 'POST'
+	}; 
+
+	var post = {
+		user_name : payload.user_name,
+		password : payload.password,
+		mac 	: macAddress
+};
+/*	var req = http.request(options, function(res) {   //http client call syntax
+	res.on('data', function(data) { 
+	process.stdout.write(data); 
+	}); 
+	}); 
+	req.write(post)/api/user/login
+	req.end();*/
+   request.post({url:'http://localhost:8002/user/login', formData: post }, function optionalCallback(err, httpResponse, body) {
+   if (err) {
+    return console.error('upload failed:', err);
+   }
+   console.log('Upload successful!  Server responded with:', body);
+ });
+
+
+	});
+
+}
 module.exports=LoginCon;
 
 
