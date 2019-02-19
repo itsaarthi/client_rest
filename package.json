@@ -22,6 +22,8 @@
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "getmac": "^1.4.6",
+    "network-interfaces": "^1.1.0",
+    "randomstring": "^1.1.5",
     "read": "^1.0.7",
     "request": "^2.88.0"
   }

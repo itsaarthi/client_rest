@@ -11,8 +11,8 @@ console.log('Express server listening on port_cert ' + port);
 
 console.log("Establishing Connection");
 
-console.log("1.R");
-console.log("2.E");
+console.log("1.Regster");
+console.log("2.Login");
 
     
 	read({prompt : 'Enter your option',silent : false},function(err,choice){

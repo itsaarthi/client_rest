@@ -4,11 +4,20 @@ var bodyParser = require('body-parser');
 var http = require('http');
 router.use(bodyParser.json());
 var request = require('request');
+const netIface = require('network-interfaces');
+
+const options = {
+  internal: false, // boolean: only acknowledge internal or external addresses (undefined: both)
+  ipVersion: 4     // integer (4 or 6): only acknowledge addresses of this IP address family (undefined: both)
+};
+
+
+const netDev = netIface.getInterface(options);
 
 var LoginCon={};
 
 LoginCon.register = function(payload){
-   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
+   require('getmac').getMac({iface: netDev,function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
@@ -41,7 +50,7 @@ LoginCon.register = function(payload){
 
 LoginCon.login = function(payload){
  
-   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
+   require('getmac').getMac({iface: netDev},function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
