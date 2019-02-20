@@ -44,7 +44,7 @@ LoginCon.register = function(payload){
 	req.write(post);
 	console.log("post",post);
 	req.end();*/
-
+}
 });
 }
 
