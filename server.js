@@ -3,6 +3,12 @@ var http = require('http');
 var app = require('./apps');
 var login = require(__root+'login/loginController')
 var read = require('read');
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 console.log("login",login);
 http.createServer(app).listen(port,function(){
@@ -14,8 +20,27 @@ console.log("Establishing Connection");
 console.log("1.Regster");
 console.log("2.Login");
 
+
+app.post('/register', urlencodedParser, function (req, res) {
+   // Prepare output in JSON format
+   response = {
+      user_name:req.body.Username,
+      password:req.body.password,
+      mail_id:req.body.email
+   };
+	var payload = {
+		user_name : response.user_name,
+		mail_id : response.mail_id,
+		password : response.password
+	}
+	login.register(payload);
+
+
+   console.log(response);
+   res.end(JSON.stringify(response));
+})
     
-	read({prompt : 'Enter your option',silent : false},function(err,choice){
+	/*read({prompt : 'Enter your option',silent : false},function(err,choice){
 	switch(choice){
 		case '1':
 read({prompt : 'Enter your user_name',silent : false},function(err,user_name){
@@ -45,4 +70,4 @@ read({prompt : 'Enter your user_name',silent : false},function(err,user_name){
 			break;
 }
 
-})
+})*/

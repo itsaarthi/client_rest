@@ -14,10 +14,12 @@ const options = {
 
 const netDev = netIface.getInterface(options);
 
+console.log("netDev",netDev);
+
 var LoginCon={};
 
 LoginCon.register = function(payload){
-   require('getmac').getMac({iface: netDev,function(err, macAddress){
+   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
@@ -44,7 +46,7 @@ LoginCon.register = function(payload){
 	req.write(post);
 	console.log("post",post);
 	req.end();*/
-}
+
 });
 }
 
