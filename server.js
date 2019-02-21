@@ -37,7 +37,8 @@ app.post('/register', urlencodedParser, function (req, res) {
 
 
    console.log(response);
-   res.end(JSON.stringify(response));
+   res.redirect('http://pandi.com/login.html');
+   // res.end(JSON.stringify(response));
 })
     
 	/*read({prompt : 'Enter your option',silent : false},function(err,choice){

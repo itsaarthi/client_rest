@@ -19,7 +19,7 @@ console.log("netDev",netDev);
 var LoginCon={};
 
 LoginCon.register = function(payload){
-   require('getmac').getMac({iface: 'enp3s0'},function(err, macAddress){
+   require('getmac').getMac({iface: netDev},function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
