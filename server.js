@@ -35,9 +35,29 @@ app.post('/register', urlencodedParser, function (req, res) {
 	}
 	login.register(payload);
 
+   console.log(response);
+   res.redirect('http://m2mcloud.com/login.html');
+   // res.end(JSON.stringify(response));
+})
+
+
+app.post('/login', urlencodedParser, function (req, res) {
+   // Prepare output in JSON format
+   response = {
+      user_name:req.body.Username,
+      password:req.body.password,
+      mail_id:req.body.email
+   };
+	var postData = {
+		user_name : response.user_name,
+		key : response.key,
+		password : response.password
+	}
+	login.login(postData);
+
 
    console.log(response);
-   res.redirect('http://pandi.com/login.html');
+   res.redirect('http://m2mcloud.com/welcome.html');
    // res.end(JSON.stringify(response));
 })
     

@@ -63,7 +63,8 @@ LoginCon.login = function(payload){
 	var post = {
 		user_name : payload.user_name,
 		password : payload.password,
-		mac 	: macAddress
+		mac 	: macAddress,
+		key		: payload.key
 };
 /*	var req = http.request(options, function(res) {   //http client call syntax
 	res.on('data', function(data) { 
