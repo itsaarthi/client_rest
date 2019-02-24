@@ -18,7 +18,7 @@ console.log("netDev",netDev);
 
 var LoginCon={};
 
-LoginCon.register = function(payload){
+LoginCon.register = function(payload,scb,ecb){
    require('getmac').getMac({iface: netDev},function(err, macAddress){
 	var options = { 
 	hostname: 'localhost', 
@@ -36,7 +36,13 @@ LoginCon.register = function(payload){
    if (err) {
     return console.error('upload failed:', err);
    }
-   console.log('Upload successful!  Server responded with:', body);
+    if(httpResponse.statusCode == 200){
+   	scb(httpResponse.statusCode);
+   }else{
+   	ecb(httpResponse.statusCode);
+   }
+
+
  });
 	/*var req = http.request(options, function(res1) {   //http client call syntax
 	res1.on('data', function(data) { 
@@ -50,7 +56,7 @@ LoginCon.register = function(payload){
 });
 }
 
-LoginCon.login = function(payload){
+LoginCon.login = function(payload,scb,ecb){
  
    require('getmac').getMac({iface: netDev},function(err, macAddress){
 	var options = { 
@@ -63,21 +69,19 @@ LoginCon.login = function(payload){
 	var post = {
 		user_name : payload.user_name,
 		password : payload.password,
-		mac 	: macAddress,
-		key		: payload.key
+		mac 	: macAddress
 };
-/*	var req = http.request(options, function(res) {   //http client call syntax
-	res.on('data', function(data) { 
-	process.stdout.write(data); 
-	}); 
-	}); 
-	req.write(post)/api/user/login
-	req.end();*/
+
    request.post({url:'http://localhost:8002/user/login', formData: post }, function optionalCallback(err, httpResponse, body) {
    if (err) {
     return console.error('upload failed:', err);
    }
-   console.log('Upload successful!  Server responded with:', body);
+   if(httpResponse.statusCode == 200){
+   	scb(httpResponse.statusCode);
+   }else{
+   	ecb(httpResponse.statusCode);
+   }
+   
  });
 
 

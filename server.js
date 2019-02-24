@@ -33,10 +33,20 @@ app.post('/register', urlencodedParser, function (req, res) {
 		mail_id : response.mail_id,
 		password : response.password
 	}
-	login.register(payload);
+
+	function ecb(data){
+	res.redirect('http://m2mcloud.com/error.html');	
+	}
+
+	function scb(Data){
+	res.redirect('http://m2mcloud.com/login.html');
+	}
+
+
+	login.register(payload,scb,ecb);
 
    console.log(response);
-   res.redirect('http://m2mcloud.com/login.html');
+   
    // res.end(JSON.stringify(response));
 })
 
@@ -45,50 +55,21 @@ app.post('/login', urlencodedParser, function (req, res) {
    // Prepare output in JSON format
    response = {
       user_name:req.body.Username,
-      password:req.body.password,
-      mail_id:req.body.email
+      password:req.body.password
    };
 	var postData = {
 		user_name : response.user_name,
-		key : response.key,
 		password : response.password
 	}
-	login.login(postData);
+	
+	function ecb(data){
+	res.redirect('http://m2mcloud.com/error.html');	
+	}
 
+	function scb(Data){
+	res.redirect('http://m2mcloud.com/welcome.html');
+	}
 
-   console.log(response);
-   res.redirect('http://m2mcloud.com/welcome.html');
-   // res.end(JSON.stringify(response));
+	login.login(postData,scb,ecb);
 })
     
-	/*read({prompt : 'Enter your option',silent : false},function(err,choice){
-	switch(choice){
-		case '1':
-read({prompt : 'Enter your user_name',silent : false},function(err,user_name){
-						read({prompt : 'Enter your mail_id',silent : false},function(err,mail_id){
-								read({prompt : 'Enter your password',silent : true},function(err,password){
-										var payload = {
-											user_name : user_name,
-											mail_id : mail_id,
-											password : password
-									}
-									login.register(payload);						
-								});
-							});
-						});
-
-			break;
-		case '2':
-			read({prompt : 'Enter your user_name',silent : false},function(err,user_name){
-				read({prompt : 'Enter your password',silent : true},function(err,password){	
-					var postData = {
-						user_name : user_name,
-						password : password
-					}
-					login.login(postData);
-				});
-			});
-			break;
-}
-
-})*/
