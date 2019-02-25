@@ -67,9 +67,33 @@ app.post('/login', urlencodedParser, function (req, res) {
 	}
 
 	function scb(Data){
-	res.redirect('http://m2mcloud.com/welcome.html');
+	res.redirect('http://m2mcloud.com/download.html');
 	}
 
 	login.login(postData,scb,ecb);
 })
-    
+
+
+
+app.post('/file', urlencodedParser, function (req, res) {
+   // Prepare output in JSON format
+   console.log("req`",req.body.file)
+ //   response = {
+ //      user_name:req.body.Username,
+ //      password:req.body.password
+ //   };
+	// var postData = {
+	// 	user_name : response.user_name,
+	// 	password : response.password
+	// }
+	
+	// function ecb(data){
+	// res.redirect('http://m2mcloud.com/error.html');	
+	// }
+
+	// function scb(Data){
+	// res.redirect('http://m2mcloud.com/welcome.html');
+	// }
+
+	// login.login(postData,scb,ecb);
+})    
