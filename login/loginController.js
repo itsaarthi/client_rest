@@ -5,6 +5,8 @@ var http = require('http');
 router.use(bodyParser.json());
 var request = require('request');
 const netIface = require('network-interfaces');
+var exec = require('child_process').exec;
+var fs=require("fs");
 
 const options = {
   internal: false, // boolean: only acknowledge internal or external addresses (undefined: both)
@@ -26,12 +28,18 @@ LoginCon.register = function(payload,scb,ecb){
 	path: '/api/user/register', 
 	method: 'POST'
 	}; 
-	const postData = {
+
+exec("./cert_gen.sh",function(err,stdout,stderr){
+
+
+const postData = {
 		user_name : payload.user_name,
 		mail_id : payload.mail_id,
 		password : payload.password,
 		mac 	: 	macAddress
+	    // csr: fs.readFileSync('/edgeserver-crt.pem').toString(), 
 };
+
 	request.post({url:'http://localhost:8002/user/register', formData: postData}, function optionalCallback(err, httpResponse, body) {
    if (err) {
     return console.error('upload failed:', err);
@@ -44,6 +52,11 @@ LoginCon.register = function(payload,scb,ecb){
 
 
  });
+
+
+})
+
+	
 	/*var req = http.request(options, function(res1) {   //http client call syntax
 	res1.on('data', function(data) { 
 	process.stdout.write(data); 

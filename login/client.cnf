@@ -1,0 +1,25 @@
+[ req ] 
+default_bits           = 4096
+days                   = 9999
+distinguished_name     = req_distinguished_name
+attributes             = req_attributes
+prompt                 = no
+x509_extensions        = v3_ca
+
+[ req_distinguished_name ]
+C                      = IN
+ST                     = TN
+L                      = Trichy
+O                      = m2m Pvt Ltd
+OU                     = secure
+CN                     = node
+emailAddress           = node@m2m.com
+
+[ req_attributes ]
+challengePassword      = 1M2m2Cloud
+[ v3_ca ]
+authorityInfoAccess = @issuer_info
+
+[ issuer_info ]
+OCSP;URI.0 = http://ocsp.example.com/
+caIssuers;URI.0 = http://example.com/ca.cert
