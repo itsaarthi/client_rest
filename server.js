@@ -53,14 +53,18 @@ app.post('/register', urlencodedParser, function (req, res) {
 
 app.post('/login', urlencodedParser, function (req, res) {
    // Prepare output in JSON format
+   console.log(req.body)
    response = {
       user_name:req.body.Username,
-      password:req.body.password
+      password:req.body.password,
+      key:req.body.key
    };
 	var postData = {
 		user_name : response.user_name,
-		password : response.password
+		password : response.password,
+		key	: response.key
 	}
+	console.log("postData",postData)
 	
 	function ecb(data){
 	res.redirect('http://m2mcloud.com/error.html');	

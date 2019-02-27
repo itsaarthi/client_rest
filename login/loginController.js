@@ -75,16 +75,18 @@ LoginCon.login = function(payload,scb,ecb){
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
-	path: '/api/user/login', 
+	path: 'user/login', 
 	method: 'POST'
 	}; 
 
 	var post = {
 		user_name : payload.user_name,
 		password : payload.password,
-		mac 	: macAddress
+		mac 	: macAddress,
+		key	: payload.key
 };
 
+console.log("postData",post)
    request.post({url:'http://localhost:8002/user/login', formData: post }, function optionalCallback(err, httpResponse, body) {
    if (err) {
     return console.error('upload failed:', err);
