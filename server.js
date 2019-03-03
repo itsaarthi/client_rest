@@ -17,7 +17,7 @@ console.log('Express server listening on port_cert ' + port);
 
 console.log("Establishing Connection");
 
-console.log("1.Regster");
+console.log("1.Register");
 console.log("2.Login");
 
 
@@ -64,7 +64,7 @@ app.post('/login', urlencodedParser, function (req, res) {
 		password : response.password,
 		key	: response.key
 	}
-	console.log("postData",postData)
+	
 	
 	function ecb(data){
 	res.redirect('http://m2mcloud.com/error.html');	

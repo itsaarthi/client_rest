@@ -22,38 +22,41 @@ var LoginCon={};
 
 LoginCon.register = function(payload,scb,ecb){
    require('getmac').getMac({iface: netDev},function(err, macAddress){
+
+exec('./client.sh',function(err,stdout,stderr){
+
 	var options = { 
 	hostname: 'localhost', 
 	port: 8002, 
 	path: '/api/user/register', 
 	method: 'POST'
 	}; 
-
-exec("./cert_gen.sh",function(err,stdout,stderr){
-
-
+	console.log("stdout",stdout);
+	console.log("err",err);
+	console.log("stderr",stderr);
+	if(!err){
 const postData = {
 		user_name : payload.user_name,
 		mail_id : payload.mail_id,
 		password : payload.password,
-		mac 	: 	macAddress
-	    // csr: fs.readFileSync('/edgeserver-crt.pem').toString(), 
+		mac 	: 	macAddress,
+	    csr : fs.readFileSync('/etc/m2m/certs/enact/client-csr.pem').toString(), 
+	    cnf : fs.readFileSync('/etc/m2m/certs/cnf/client.cnf').toString()
 };
 
 	request.post({url:'http://localhost:8002/user/register', formData: postData}, function optionalCallback(err, httpResponse, body) {
    if (err) {
     return console.error('upload failed:', err);
    }
+   console.log("body",httpResponse.body.cert)
     if(httpResponse.statusCode == 200){
    	scb(httpResponse.statusCode);
    }else{
    	ecb(httpResponse.statusCode);
    }
 
-
  });
-
-
+}
 })
 
 	

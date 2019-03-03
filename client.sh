@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-mkdir -p /etc/m2m/certs/cnf
+mkdir -p  /etc/m2m/certs/cnf
 
 
 echo -e "[ req ] 
