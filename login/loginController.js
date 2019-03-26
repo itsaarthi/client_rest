@@ -40,7 +40,7 @@ const postData = {
 		mail_id : payload.mail_id,
 		password : payload.password,
 		mac 	: 	macAddress,
-	    csr : fs.readFileSync('/etc/m2m/certs/enact/client-csr.pem').toString(), 
+	    csr : fs.readFileSync('/etc/m2m/certs/client-csr.pem').toString(), 
 	    cnf : fs.readFileSync('/etc/m2m/certs/cnf/client.cnf').toString()
 };
 

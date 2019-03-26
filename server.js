@@ -83,11 +83,16 @@ app.post('/login', urlencodedParser, function (req, res) {
 app.post('/file', urlencodedParser, function (req, res) {
    
    var file=req.body.file;
-   exec("./download.sh "+file+,function(err,stdout,stderr){
+   console.log("file",file);
+   exec("./download.sh "+file,function(err,stdout,stderr){
+   		 console.log("1",err);
+ console.log("2",stdout);
+ console.log("3",stderr);
    		if(!err){
    			res.redirect('http://m2mcloud.com/download.html');		
    		}
    });
    
- 
+
+
 })    

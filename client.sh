@@ -32,7 +32,7 @@ caIssuers;URI.0 = http://example.com/ca.cert" > /etc/m2m/certs/cnf/client.cnf
 
 mkdir -p /etc/m2m/certs/enact/
 #Create private key
-openssl genrsa -out /etc/m2m/certs/enact/client-key.pem 4096
+openssl genrsa -out /etc/m2m/certs/client-key.pem 4096
 #Make the signing request
 openssl req -new -config /etc/m2m/certs/cnf/client.cnf -key /etc/m2m/certs/client-key.pem -out /etc/m2m/certs/client-csr.pem
 
