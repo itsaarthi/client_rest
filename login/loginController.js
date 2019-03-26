@@ -48,7 +48,7 @@ const postData = {
    if (err) {
     return console.error('upload failed:', err);
    }
-   console.log("body",httpResponse.body.cert)
+   console.log("body",httpResponse.body)
     if(httpResponse.statusCode == 200){
    	scb(httpResponse.statusCode);
    }else{
