@@ -34,6 +34,7 @@ mkdir -p /etc/m2m/certs/enact/
 #Create private key
 openssl genrsa -out /etc/m2m/certs/enact/client-key.pem 4096
 #Make the signing request
-openssl req -new -config /etc/m2m/certs/cnf/client.cnf -key /etc/m2m/certs/enact/client-key.pem -out /etc/m2m/certs/enact/client-csr.pem
+openssl req -new -config /etc/m2m/certs/cnf/client.cnf -key /etc/m2m/certs/client-key.pem -out /etc/m2m/certs/client-csr.pem
 
-chmod a+x /etc/m2m/certs/enact/*
+cp client-key.pem enact-crt.pem /etc/m2m/certs/enact/
+chmod 777 /etc/m2m/certs/enact/*

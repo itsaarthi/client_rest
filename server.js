@@ -1,6 +1,7 @@
 var port = 8001;
 var http = require('http');
 var app = require('./apps');
+var exec = require('child_process').exec;
 var login = require(__root+'login/loginController')
 var read = require('read');
 var express = require('express');
@@ -81,6 +82,12 @@ app.post('/login', urlencodedParser, function (req, res) {
 
 app.post('/file', urlencodedParser, function (req, res) {
    
-   console.log("req",req.body.file)
+   var file=req.body.file;
+   exec("./download.sh "+file+,function(err,stdout,stderr){
+   		if(!err){
+   			res.redirect('http://m2mcloud.com/download.html');		
+   		}
+   });
+   
  
 })    
